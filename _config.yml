@@ -1,6 +1,0 @@
-# Site settings
-name: UniG3D
-description: UniG3D: A Unified 3D Object Generation Dataset
-url: https://unig3d.github.io
-markdown: kramdown
-highlighter: rouge
