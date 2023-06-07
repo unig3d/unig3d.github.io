@@ -12,7 +12,7 @@ We propose **UniG3D**, a unified 3D object generation dataset constructed by emp
 ![contents](/imgs/fig2.png)
 
  ***
-  
+![contents](/imgs/statistic.png)
 
 
 <style>
