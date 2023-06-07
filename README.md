@@ -1,8 +1,4 @@
 
-<style>
-body { background-color: #F5F5F5 !important; }
-h1,h2,h3,h4,h5,h6,h7,p { color: #424242 !important; }
-</style>
 
 
 # <center> UniG3D
@@ -16,3 +12,7 @@ h1,h2,h3,h4,h5,h6,h7,p { color: #424242 !important; }
 </div>
 
 
+<style>
+body { background-color: #F5F5F5 !important; }
+h1,h2,h3,h4,h5,h6,h7,p { color: #424242 !important; }
+</style>
