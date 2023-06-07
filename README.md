@@ -4,7 +4,10 @@
 # <center> UniG3D
 ##  <center> UniG3D: A Unified 3D Object Generation Dataset
 <br/>
+
   
+### Abstract
+We propose **UniG3D**, a unified 3D object generation dataset constructed by employing a universal data transformation pipeline on Objaverse and ShapeNet datasets. This pipeline converts each raw 3D model into comprehensive multi-modal data representation <text, image, point cloud, mesh> by employing rendering engines and multi-modal models. These modules ensure the richness of textual information and the comprehensiveness of data representation.
 ***
   
 <div align=center>
