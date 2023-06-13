@@ -1,12 +1,945 @@
-<h1 id="-center-unig3d"><center> UniG3D</h1>
-<h2 id="-center-unig3d-a-unified-3d-object-generation-dataset"><center> UniG3D: A Unified 3D Object Generation Dataset</h2>
-<p><br/></p>
-<h3 id="abstract">Abstract</h3>
-<p>We propose <strong>UniG3D</strong>, a unified 3D object generation dataset constructed by employing a universal data transformation pipeline on Objaverse and ShapeNet datasets. This pipeline converts each raw 3D model into comprehensive multi-modal data representation <text, image, point cloud, mesh> by employing rendering engines and multi-modal models. These modules ensure the richness of textual information and the comprehensiveness of data representation.</p>
-<p><img src="/imgs/fig2.png" alt="contents"></p>
-<hr>
-<p><img src="/imgs/statistic.png" alt="contents"></p>
-<style>
-body { background-color: #F5F5F5 !important; }
-h1,h2,h3,h4,h5,h6,h7,p { color: #424242 !important; }
-</style>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="A novel approach that achieves photo-realistic rendering, fast reconstruction, and compact modeling.">
+    <meta name="author" content="Tong Wu, Jiarui Zhang, Xiao Fu, Yuxin Wang, Jiawei Ren, Liang Pan, Wayne Wu, Lei Yang, Jiaqi Wang, Chen Qian, 
+        Dahua Lin, Ziwei Liu">
+
+    <title>OmniObject3D: Large-Vocabulary 3D Object Dataset for Realistic  Perception, Reconstruction and Generation</title>
+
+    <!-- Custom styles for this template -->
+    <link href="offcanvas.css" rel="stylesheet">
+        <link rel="icon" href="img/oo3d_teaser.gif" type="image/x-ico">
+
+
+
+</head>
+
+<body>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container"></div>
+    <!-- <img src="img/oo3d_teaser.gif" style="width:30%; margin-right:0px; margin-top:0px;"> -->
+    <h1 class="nerf_title_v2">OmniObject3D</h1>
+    <h1 class="nerf_subheader_v2">OmniObject3D: Large-Vocabulary 3D Object Dataset for Realistic  Perception, Reconstruction and Generation</h1>
+    <h1 class="nerf_subheader_v2">CVPR 2023 (Award Candidate)</h1>
+    <hr>
+    <p class="authors">
+      <a href=https://wutong16.github.io/ target="_blank"> Tong Wu</a><sup>1,2</sup>,
+      <a href=> Jiarui Zhang</a><sup>1,3</sup>,
+      <a href=https://fuxiao0719.github.io/ target="_blank"> Xiao Fu</a><sup>1</sup>,
+      <a href=> Yuxin Wang</a><sup>1,4</sup>,
+      <a href=https://jiawei-ren.github.io/ target="_blank"> Jiawei Ren</a><sup>5</sup>,
+      <a href=https://scholar.google.com/citations?user=lSDISOcAAAAJ&hl=zh-CN target="_blank"> Liang Pan</a><sup>5</sup>,
+        <br>
+      <a href=https://wywu.github.io/ target="_blank"> Wayne Wu</a><sup>1</sup>,
+      <a href=https://scholar.google.com.hk/citations?user=jZH2IPYAAAAJ&hl=en target="_blank"> Lei Yang</a><sup>1,3</sup>,
+      <a href=https://myownskyw7.github.io/ target="_blank"> Jiaqi Wang</a><sup>1</sup>,
+      <a href=https://scholar.google.com/citations?view_op=list_works&hl=zh-CN&hl=zh-CN&user=AerkT0YAAAAJ&sortby=pubdate target="_blank"> Chen Qian</a><sup>1</sup>,
+      <a href=https://scholar.google.com/citations?user=GMzzRRUAAAAJ&hl=zh-CN target="_blank"> Dahua Lin</a><sup>1,2</sup>&#9993,
+      <a href=https://liuziwei7.github.io/ target="_blank"> Ziwei Liu</a><sup>5</sup>&#9993
+    </p>
+
+    <h1 class="nerf_subheader_v2">
+      <sup>1</sup>Shanghai Artificial Intelligence Laboratory, 
+      <sup>2</sup>The Chinese University of Hong Kong,
+      <sup>3</sup>SenseTime Research, <br>
+      <sup>4</sup>Hong Kong University of Science and Technology,
+      <sup>5</sup>S-Lab, Nanyang Technological University
+      <!-- <sup>6</sup>Centre of Perceptual and Interactive Intelligence -->
+    </h1>
+    <!-- <div class="nerf_equal_v2"><span class="text-span_nerf">*</span><span class="text-span_nerf_star">+</span>Corresponding Author</div> -->
+
+    <!-- </br></br> -->
+    <div class="btn-group" role="group" aria-label="Top menu">
+        <a class="btn btn-primary" href="https://arxiv.org/abs/2301.07525" target="_blank">Paper</a>
+        <a class="btn btn-primary" href="https://github.com/omniobject3d/OmniObject3D/tree/main" target="_blank">Code</a>
+        <a class="btn btn-primary" href="https://opendatalab.com/OpenXD-OmniObject3D-New/download" target="_blank">Dataset</a>
+    </div>
+</div>
+
+    
+<div class="container">
+
+<!--<hr>-->
+    </br></br>
+    <div data-anchor="slide1" class="section nerf_section">
+        <div class="grey_container w-container">
+            <h2 class="grey-heading_nerf">
+                <b>Abstract</b>
+            </h2>
+            <p class="paragraph-3 nerf_text">
+                We propose OmniObject3D, a large vocabulary 3D object dataset with massive high-quality real-scanned 3D objects to facilitate the development of 3D perception, reconstruction, and generation in the real world.
+            </p>   
+            <img src="img/teaser_full_v2.gif" style="width:95%; margin-right:0px; margin-top:0px;">
+            <p class="paragraph-3 nerf_text">
+                OmniObject3D has several appealing properties: 
+                <br>
+                <b>1) Large Vocabulary:</b> It comprises <b style="color:#585858">6,000</b> scanned objects in <b style="color:#585858">190</b> daily categories, sharing common classes with popular 2D datasets (e.g., ImageNet and LVIS), benefiting the pursuit of generalizable 3D representations.   
+                <br>
+                <b>2) Rich Annotations:</b> Each 3D object is captured with both 2D and 3D sensors, providing <b style="color:#585858">textured meshes</b>, <b style="color:#585858">point clouds</b>, <b style="color:#585858">multi-view rendered images</b>, and <b style="color:#585858">multiple real-captured videos</b>.
+                <br>
+                <b>3) Realistic Scans:</b> The professional scanners support high-quality object scans with precise shapes and realistic appearances.
+                <br>
+            </p>
+            <p class="paragraph-3 nerf_text">
+            With the vast exploration space offered by OmniObject3D, we carefully set up four evaluation tracks: 
+            <b>a) robust 3D perception</b>, <b>b) novel-view synthesis</b>, <b>c) neural surface reconstruction</b>, and <b>d) 3D object generation</b>.
+            </p>
+        </div>
+    </div>
+
+</br></br>
+<div class="section">
+    <s2> Statistics and Distribution</s2>
+            <!-- <h2 class="grey-heading_nerf">
+                <b>OmniObject3D Dataset</b>
+            </h2> -->
+            <hr>
+            <!-- <p class="paragraph-3 nerf_text">
+                
+                OO3D is good
+            </p> -->
+            
+            <div class="columns-5 w-row">
+                <style type="text/css">
+                    .tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
+                    .tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
+                      font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:3px 3px;word-break:normal;}
+                    .tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
+                      font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                    .tg .tg-baqh{text-align:center;vertical-align:top}
+                    .tg .tg-6qw1{background-color:#c0c0c0;text-align:center;vertical-align:top}
+                    .tg .tg-6qw2{background-color:#e4e1e1;text-align:center;vertical-align:top}
+                    </style>
+                    <table class="tg" style="undefined;table-layout: fixed; width: 582px; margin-left:auto;margin-right:auto;">
+                    <colgroup>
+                    <col style="width: 90px">
+                    <col style="width: 50px">
+                    <col style="width: 50px">
+                    <col style="width: 50px">
+                    <col style="width: 70px">
+                    <col style="width: 70px">
+                    <col style="width: 70px">
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th class="tg-6qw1">Dataset</th>
+                        <th class="tg-6qw1">Real</th>
+                        <th class="tg-6qw1">Full 3D</th>
+                        <th class="tg-6qw1">Video</th>
+                        <th class="tg-6qw1">#Objects</th>
+                        <th class="tg-6qw1">#Classes </th>
+                        <th class="tg-6qw1"> R<sup>LVIS</sup>(%)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="tg-baqh"><a href=https://shapenet.org/ target="_blank"> ShapeNet</a></td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-6qw2"><b>51k</b></td>
+                        <td class="tg-baqh">55</td>
+                        <td class="tg-baqh">4.1</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh"><a href=https://modelnet.cs.princeton.edu/ target="_blank"> ModelNet</a></td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">12k</td>
+                        <td class="tg-baqh">40</td>
+                        <td class="tg-baqh">2.4</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh"><a href=https://tianchi.aliyun.com/specials/promotion/alibaba-3d-future target="_blank"> 3D-Future</a></td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">16k</td>
+                        <td class="tg-baqh">34</td>
+                        <td class="tg-baqh">1.3</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh"><a href=https://amazon-berkeley-objects.s3.amazonaws.com/index.html target="_blank"> ABO</a></td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">8k</td>
+                        <td class="tg-baqh">63</td>
+                        <td class="tg-baqh">3.5</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh"><a href=https://github.com/rehg-lab/lowshot-shapebias target="_blank"> Toys4K</a></td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">4k</td>
+                        <td class="tg-baqh">105</td>
+                        <td class="tg-baqh">7.7</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh"><a href=https://ai.facebook.com/datasets/CO3D-dataset/ target="_blank"> CO3D</a></td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh">19K</td>
+                        <td class="tg-baqh">50</td>
+                        <td class="tg-baqh">4.2</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh"><a href=https://roboimagedata.compute.dtu.dk/?page_id=36 target="_blank"> DTU</a></td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">124</td>
+                        <td class="tg-baqh">-</td>
+                        <td class="tg-baqh">0</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh"><a href=https://hkust-vgd.github.io/scanobjectnn/ target="_blank"> ScanObjectNN</a></td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">15k</td>
+                        <td class="tg-baqh">15</td>
+                        <td class="tg-baqh">1.3</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh"><a href=https://research.google/resources/datasets/scanned-objects-google-research/ target="_blank"> GSO</a></td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">1k</td>
+                        <td class="tg-baqh">17</td>
+                        <td class="tg-baqh">0.9</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh"><a href=https://liuliu66.github.io/articulationobjects/ target="_blank"> AKB-48</a></td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh"></td>
+                        <td class="tg-baqh">2k</td>
+                        <td class="tg-baqh">48</td>
+                        <td class="tg-baqh">1.8</td>
+                      </tr>
+                      <tr>
+                        <td class="tg-baqh">Ours</td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh">&#x2713;</td>
+                        <td class="tg-baqh">6k</td>
+                        <td class="tg-6qw2"><b>190</b></td>
+                        <td class="tg-6qw2"><b>10.8</b></td>
+                      </tr>
+                    </tbody>
+                    </table>
+            </div>
+          
+          </br>
+            
+          <p class="paragraph-3 nerf_text", style="text-align:center">
+              Table 1. A comparison between OmniObject3D and other commonly-used 3D object datasets. It is the largest among all the real-world scanned object datasets.
+          </p>
+          
+        </br>
+            
+          <div class="columns-5 w-row">
+                <img src="img/dataset_info.gif" style="width:95%; margin-right:0px; margin-top:10px;margin-bottom:0px;">
+          </div>
+
+        </br>
+
+          <p class="paragraph-3 nerf_text", style="text-align:center">
+            Figure 1. Semantic distribution of our dataset.
+          </p>
+    </div>
+
+    <div class="section">
+        <s2>Benchmarks</s2>
+        <hr>
+        <h2 class="grey-heading_nerf">
+            <b>Robust 3D Perception</b>
+        </h2>
+        <p class="paragraph-3 nerf_text">
+          OmniObject3D boosts robustness analysis of point cloud classification by disentangling the two critical out-of-distribution (OOD) challenges introduced in the paper, i.e., OOD styles and OOD corruptions.
+        </p>
+        <img src="img/point_benchmark.gif" style="width:70%; margin-right:0px; margin-top:0px;">
+      
+        </br>
+
+        <p class="paragraph-3 nerf_text", style="text-align:center">
+          Figure 2. Analysis on robustness to OOD styles and OOD corruptions.
+        </p>
+
+        <h2 class="grey-heading_nerf">
+            <b>Novel View Synthesis</b>
+        </h2>
+        <p class="paragraph-3 nerf_text">
+          We study several representative methods on OmniObject3D for novel view synthesis (NVS) in two settings: 1) training on a single scene with densely captured images and 2) learning priors across scenes from the dataset to explore the generalization ability of NeRF-style models. We show examples of single-scene NVS by <a href="https://jonbarron.info/mipnerf/" target="_blank">Mip-NeRF</a>.
+        </p>
+
+        <!-- <p class="paragraph-3 nerf_text">
+          We show examples of single-scene NVS by <a href="https://jonbarron.info/mipnerf/">Mip-NeRF</a>.
+        </p> -->
+
+        <div class="container-2 nerf_header_v2 w-container">
+    
+            <div data-delay="10000" data-animation="slide" class="nerf_slider_v2 w-slider" data-autoplay="true" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="800" data-infinite="true"><div class="mask w-slider-mask">
+
+              <div class="w-slide">
+                  <div class="div-block-9 first_video">
+                      <div class="video_class w-embed">
+                          <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                            <source src="video/mipnerf_selected/couch.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                      </div>
+                      <div class="video_class mobile w-embed">
+                          <video  width=100% height=100% muted controls loop preload="metadata" poster="">
+                            <source src="video/mipnerf_selected/couch.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                      </div>
+                  </div>
+
+                  <div class="div-block-9">
+                      <div class="video_class w-embed">
+                          <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                            <source src="video/mipnerf_selected/dinasour.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                      </div>
+                      <div class="video_class mobile w-embed">
+                          <video  width=100% height=100% muted controls loop preload="metadata" poster="">
+                              <source src="video/mipnerf_selected/dinasour.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                          </video>
+                      </div>
+                  </div>
+              </div>
+
+                <div class="w-slide">
+                  <div class="div-block-9">
+                      <div class="video_class w-embed">
+                          <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                            <source src="video/mipnerf_selected/toy_house.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                      </div>
+                      <div class="video_class mobile w-embed">
+                          <video  width=100% height=100% muted controls loop preload="metadata" poster="">
+                            <source src="video/mipnerf_selected/toy_house.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="w-slide">
+                <div class="div-block-9">
+                    <div class="video_class w-embed">
+                        <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                          <source src="video/mipnerf_selected/ornament.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video_class mobile w-embed">
+                        <video  width=100% height=100% muted controls loop preload="metadata" poster="">
+                          <source src="video/mipnerf_selected/ornament.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-slide">
+                <div class="div-block-9">
+                    <div class="video_class w-embed">
+                        <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                          <source src="video/mipnerf_selected/zongzi.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video_class mobile w-embed">
+                        <video  width=100% height=100% muted controls loop preload="metadata" poster="">
+                          <source src="video/mipnerf_selected/zongzi.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+              <div class="w-slide">
+                  <div class="div-block-9">
+                      <div class="video_class w-embed">
+                          <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                              <source src="video/mipnerf_selected/bread.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                          </video>
+                      </div>
+                      <div class="video_class mobile w-embed">
+                          <video  width=100% height=100% muted controls loop preload="metadata" poster="">
+                              <source src="video/mipnerf_selected/bread.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                          </video>
+                      </div>                 
+                  </div>
+
+
+                  <div class="div-block-9 last_block">
+                      <div class="video_class w-embed">
+                          <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                              <source src="video/mipnerf_selected/chair.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                          </video>
+                      </div>
+                  <div class="video_class mobile w-embed">
+                      <video width=100% height=100% muted controls loop preload="metadata" poster="">
+                          <source src="video/mipnerf_selected/chair.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                      </video>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="w-slider-arrow-left"><div class="w-icon-slider-left"></div></div>
+                <div class="w-slider-arrow-right"><div class="w-icon-slider-right"></div></div>
+                <div class="nerf_slide_nav w-slider-nav w-slider-nav-invert w-round"></div></div>
+        </div>
+    <!-- </div> -->
+
+    <p class="paragraph-3 nerf_text">
+      We show examples of cross-scene NVS by <a href="https://alexyu.net/pixelnerf/" target="_blank">pixelNeRF</a>, <a href="https://apchenstu.github.io/mvsnerf/" target="_blank">MVSNeRF</a>, and <a href="https://ibrnet.github.io/" target="_blank">IBRNet</a> given 3 views (ft denotes fine-tuned with 10 views).
+    </p>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <!-- <h3>Novel View Appearance & Label Synthesis</h3> -->
+        <!-- <hr style="margin-top:0px"> -->
+        <video width="100%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+          <source src="video/sparse_NeRF.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+        <!-- <p class="paragraph-3 nerf_text">
+            Neural Rendering TODO
+        </p> -->
+
+        <h2 class="grey-heading_nerf">
+            <b>Neural Surface Reconstruction</b>
+        </h2>
+        <p class="paragraph-3 nerf_text">
+          Precise surface reconstruction from multi-view images enables a broad range of applications. We include representative methods for dense-view and sparse-view surface reconstruction, respectively. We show examples of dense-view surface reconstruction by <a href="https://lingjie0206.github.io/papers/NeuS/" target="_blank">NeuS</a>. More results on the sparse-view setting can be found in the paper.
+        </p>
+        <!-- <p class="paragraph-3 nerf_text">
+          We show examples of dense-view surface reconstruction by <a href="https://lingjie0206.github.io/papers/NeuS/">NeuS</a>. More results on the sparse-view setting can be found in the paper.
+        </p> -->
+
+
+        <div class="container-2 nerf_header_v2 w-container">
+    
+            <div data-delay="10000" data-animation="slide" class="nerf_slider_v2 w-slider" data-autoplay="true" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="800" data-infinite="true"><div class="mask w-slider-mask">
+
+              <div class="w-slide">
+                  <div class="div-block-9 first_video">
+                      <div class="video_class w-embed">
+                          <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                            <source src="video/neus_selected/backpack_h264.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                      </div>
+                      <div class="video_class mobile w-embed">
+                          <video  width=100% height=100% muted controls loop preload="metadata" poster="">
+                            <source src="video/neus_selected/backpack_h264.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                      </div>
+                  </div>
+
+                  <div class="div-block-9">
+                      <div class="video_class w-embed">
+                          <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                            <source src="video/neus_selected/toy_train_h264.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                      </div>
+                      <div class="video_class mobile w-embed">
+                          <video  width=100% height=100% muted controls loop preload="metadata" poster="">
+                              <source src="video/neus_selected/toy_train_h264.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                          </video>
+                      </div>
+                  </div>
+              </div>
+
+                <div class="w-slide">
+                  <div class="div-block-9">
+                      <div class="video_class w-embed">
+                          <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                            <source src="video/neus_selected/starfish_h264.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                      </div>
+                      <div class="video_class mobile w-embed">
+                          <video  width=100% height=100% muted controls loop preload="metadata" poster="">
+                            <source src="video/neus_selected/starfish_h264.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                      </div>
+                  </div>
+              </div><!--  stov -->
+
+              <div class="w-slide">
+                <div class="div-block-9">
+                    <div class="video_class w-embed">
+                        <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                          <source src="video/neus_selected/skateboard_h264.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video_class mobile w-embed">
+                        <video  width=100% height=100% muted controls loop preload="metadata" poster="">
+                          <source src="video/neus_selected/skateboard_h264.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-slide">
+                <div class="div-block-9">
+                    <div class="video_class w-embed">
+                        <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                          <source src="video/neus_selected/conch_h264.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video_class mobile w-embed">
+                        <video  width=100% height=100% muted controls loop preload="metadata" poster="">
+                          <source src="video/neus_selected/conch_h264.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-slide">
+                <div class="div-block-9">
+                    <div class="video_class w-embed">
+                        <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                          <source src="video/neus_selected/mangosteen_h264.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video_class mobile w-embed">
+                        <video  width=100% height=100% muted controls loop preload="metadata" poster="">
+                          <source src="video/neus_selected/mangosteen_h264.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+
+              <div class="w-slide">
+                  <div class="div-block-9">
+                      <div class="video_class w-embed">
+                          <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                              <source src="video/neus_selected/pillow_h264.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                          </video>
+                      </div>
+                      <div class="video_class mobile w-embed">
+                          <video  width=100% height=100% muted controls loop preload="metadata" poster="">
+                              <source src="video/neus_selected/pillow_h264.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                          </video>
+                      </div>                 
+                  </div>
+
+
+                  <div class="div-block-9 last_block">
+                      <div class="video_class w-embed">
+                          <video  width=100% height=100% autoplay muted controls loop preload="metadata" poster="">
+                              <source src="video/neus_selected/ricecooker_h264.mp4" type="video/mp4">
+                              Your browser does not support the video tag.
+                          </video>
+                      </div>
+                  <div class="video_class mobile w-embed">
+                      <video width=100% height=100% muted controls loop preload="metadata" poster="">
+                          <source src="video/neus_selected/ricecooker_h264.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                      </video>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="w-slider-arrow-left"><div class="w-icon-slider-left"></div></div>
+                <div class="w-slider-arrow-right"><div class="w-icon-slider-right"></div></div>
+                <div class="nerf_slide_nav w-slider-nav w-slider-nav-invert w-round"></div></div>
+        </div>
+
+        <h2 class="grey-heading_nerf">
+            <b>3D Object Generation</b>
+        </h2>
+        <p class="paragraph-3 nerf_text">
+          State-of-the-art generative models can directly generate textured 3D meshes. We train We train <a href="https://nv-tlabs.github.io/GET3D/" target="_blank">GET3D</a> on OmniObject3D and show examples of the generated shapes.
+        </p>
+
+<!--        <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style></div>-->
+        <div class="section hero nerf-_v2 wf-section ">
+            <div class="container-2 nerf_header_v2 w-container">
+
+                <div data-delay="10000" data-animation="slide" class="nerf_slider_v2 w-slider" data-autoplay="true" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="800" data-infinite="true"><div class="mask w-slider-mask">
+
+                  <div class="w-slide">
+                      <div class="div-block-9 first_video">
+                        <div class="video_class w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="banana"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/banana.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                        <div class="video_class mobile w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="banana"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/banana.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+
+                      </div>
+
+                      <div class="div-block-9">
+                        <div class="video_class w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="mangosteen"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/mangosteen.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                        <div class="video_class mobile w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="mangosteen"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/mangosteen.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                      </div>
+                  </div>
+
+                    <div class="w-slide">
+                      <div class="div-block-9">
+                        <div class="video_class w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="pineapple"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/pineapple.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                        <div class="video_class mobile w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="pineapple"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/pineapple.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                          
+                      </div>
+                  </div><!--  pond -->
+                    <div class="w-slide">
+                      <div class="div-block-9">
+                        <div class="video_class w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="Litchi"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/litchi.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                        <div class="video_class mobile w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="Litchi"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/litchi.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                      </div>
+                  </div><!--  family -->
+                    <div class="w-slide">
+                      <div class="div-block-9">
+                        <div class="video_class w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="toy_bus"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/toy_bus.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                        <div class="video_class mobile w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="toy_bus"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/toy_bus.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                      </div>
+                  </div><!--  succulent -->
+                    <div class="w-slide">
+                      <div class="div-block-9">
+                        <div class="video_class w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="toy_bus2"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/toy_bus2.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                        <div class="video_class mobile w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="toy_bus2"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/toy_bus2.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                      </div>
+                  </div><!--  flower -->
+
+                  <div class="w-slide">
+                      <div class="div-block-9">
+                        <div class="video_class w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="brush"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/brush.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                        <div class="video_class mobile w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="brush"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/brush.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                      </div>
+
+
+                      <div class="div-block-9 last_block">
+                        <div class="video_class w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="chess"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/chess.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                        <div class="video_class mobile w-embed w-script">
+                            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+                            <model-viewer
+                              alt="chess"
+                              src="https://raw.githubusercontent.com/omniobject3d/models_online/main/web_glbs/chess.glb"
+                              style="width: 100%; margin-left:25px;height: 270px; background-color: #ffffff"
+                              poster=""
+                                exposure=".8"
+                              auto-rotate
+                              camera-controls>
+                
+                            </model-viewer>
+                
+                        </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="w-slider-arrow-left"><div class="w-icon-slider-left"></div></div>
+                    <div class="w-slider-arrow-right"><div class="w-icon-slider-right"></div></div>
+                    <div class="nerf_slide_nav w-slider-nav w-slider-nav-invert w-round"></div></div>
+            </div>
+        </div>
+
+
+
+        </br></br></br>
+        <s2> Concurrent works </s2>
+        <hr>
+        <!-- <div class="section"> -->
+        <p class="paragraph-3 nerf_text">
+        Some concurrent works also focus on building large-scale 3D object datasets:</p>
+        <!-- <div class="container"> -->
+         <ul>
+            <li class="paragraph-3 nerf_text", style="text-align: left; color:#585858"><a href="https://objaverse.allenai.org/" target="_blank"> Objaverse</a> is a massive dataset with 800K+ annotated 3D objects collected from <a href="https://sketchfab.com/feed" target="_blank"> Sketchfab</a>.
+            </li>
+            <li class="paragraph-3 nerf_text", style="text-align: left; color:#585858"><a href="https://eyecan-ai.github.io/scannerf/" target="_blank">ScanNeRF</a> provides an effective pipeline for scanning real objects in quantity and effortlessly for evaluating Neural Rendering frameworks.</li>
+         </ul>
+        <!-- </ul> -->
+    <!-- </div> -->
+        
+
+
+
+        <!-- </br></br></br>
+        <s2> Acknowledgements </s2>
+        <hr>
+        <p class="paragraph-3 nerf_text">
+            We would like to thank  Yannick Hold-Geoffroy for his useful suggestion in video animation,
+            Qiangeng Xu for providing some baseline results,
+            and, Katja Schwarz and Michael Niemeyer for providing helpful video materials.
+            This project was supported by NSF grant IIS-1764078 and gift money from VIVO.
+        </p> -->
+
+        </br></br>
+<!--    <div class="section">-->
+        <s2>Bibtex</s2>
+        <hr>
+        <div class="bibtexsection">
+            @article{wu2023omniobject3d,
+              author = {Tong Wu, Jiarui Zhang, Xiao Fu, Yuxin Wang, Jiawei Ren, 
+              Liang Pan, Wayne Wu, Lei Yang, Jiaqi Wang, Chen Qian, Dahua Lin, Ziwei Liu},
+              title = {OmniObject3D: Large-Vocabulary 3D Object Dataset for Realistic Perception, 
+                Reconstruction and Generation},
+                journal={IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+                year={2023}
+            }
+        </div>
+<!--    </div>-->
+    </div>
+    <hr>
+
+    <footer>
+        <p>This website is partially borrowed from <a href="https://apchenstu.github.io/TensoRF/" target="_blank">TensoRF</a>.
+            </p>
+    </footer>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+<script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=51e0d73d83d06baa7a00000f" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/js/webflow.fd6c33218.js" type="text/javascript"></script>
+
+<!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+
+</body>
+</html>
