@@ -117,120 +117,32 @@
                     <col style="width: 50px">
                     <col style="width: 50px">
                     <col style="width: 50px">
-                    <col style="width: 70px">
-                    <col style="width: 70px">
-                    <col style="width: 70px">
+                    <col style="width: 50px">
                     </colgroup>
                     <thead>
                       <tr>
                         <th class="tg-6qw1">Dataset</th>
-                        <th class="tg-6qw1">Real</th>
-                        <th class="tg-6qw1">Full 3D</th>
-                        <th class="tg-6qw1">Video</th>
-                        <th class="tg-6qw1">#Objects</th>
-                        <th class="tg-6qw1">#Classes </th>
-                        <th class="tg-6qw1"> R<sup>LVIS</sup>(%)</th>
+                        <th class="tg-6qw1">#Mesh</th>
+                        <th class="tg-6qw1">#PCL</th>
+                        <th class="tg-6qw1">#Image</th>
+                        <th class="tg-6qw1">#Text</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td class="tg-baqh"><a href=https://shapenet.org/ target="_blank"> ShapeNet</a></td>
+                        <td class="tg-baqh">500K</td>
+                        <td class="tg-baqh">50K</td>
                         <td class="tg-baqh"></td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-6qw2"><b>51k</b></td>
-                        <td class="tg-baqh">55</td>
-                        <td class="tg-baqh">4.1</td>
+                        <td class="tg-6qw2">1 million</td>
+                        <td class="tg-baqh">50K</td>
                       </tr>
                       <tr>
-                        <td class="tg-baqh"><a href=https://modelnet.cs.princeton.edu/ target="_blank"> ModelNet</a></td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh">12k</td>
-                        <td class="tg-baqh">40</td>
-                        <td class="tg-baqh">2.4</td>
-                      </tr>
-                      <tr>
-                        <td class="tg-baqh"><a href=https://tianchi.aliyun.com/specials/promotion/alibaba-3d-future target="_blank"> 3D-Future</a></td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh">16k</td>
-                        <td class="tg-baqh">34</td>
-                        <td class="tg-baqh">1.3</td>
-                      </tr>
-                      <tr>
-                        <td class="tg-baqh"><a href=https://amazon-berkeley-objects.s3.amazonaws.com/index.html target="_blank"> ABO</a></td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh">8k</td>
-                        <td class="tg-baqh">63</td>
-                        <td class="tg-baqh">3.5</td>
-                      </tr>
-                      <tr>
-                        <td class="tg-baqh"><a href=https://github.com/rehg-lab/lowshot-shapebias target="_blank"> Toys4K</a></td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh">4k</td>
-                        <td class="tg-baqh">105</td>
-                        <td class="tg-baqh">7.7</td>
-                      </tr>
-                      <tr>
-                        <td class="tg-baqh"><a href=https://ai.facebook.com/datasets/CO3D-dataset/ target="_blank"> CO3D</a></td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh">19K</td>
-                        <td class="tg-baqh">50</td>
-                        <td class="tg-baqh">4.2</td>
-                      </tr>
-                      <tr>
-                        <td class="tg-baqh"><a href=https://roboimagedata.compute.dtu.dk/?page_id=36 target="_blank"> DTU</a></td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh">124</td>
-                        <td class="tg-baqh">-</td>
-                        <td class="tg-baqh">0</td>
-                      </tr>
-                      <tr>
-                        <td class="tg-baqh"><a href=https://hkust-vgd.github.io/scanobjectnn/ target="_blank"> ScanObjectNN</a></td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh">15k</td>
-                        <td class="tg-baqh">15</td>
-                        <td class="tg-baqh">1.3</td>
-                      </tr>
-                      <tr>
-                        <td class="tg-baqh"><a href=https://research.google/resources/datasets/scanned-objects-google-research/ target="_blank"> GSO</a></td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh">1k</td>
-                        <td class="tg-baqh">17</td>
-                        <td class="tg-baqh">0.9</td>
-                      </tr>
-                      <tr>
-                        <td class="tg-baqh"><a href=https://liuliu66.github.io/articulationobjects/ target="_blank"> AKB-48</a></td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh"></td>
-                        <td class="tg-baqh">2k</td>
-                        <td class="tg-baqh">48</td>
-                        <td class="tg-baqh">1.8</td>
-                      </tr>
-                      <tr>
-                        <td class="tg-baqh">Ours</td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh">&#x2713;</td>
-                        <td class="tg-baqh">6k</td>
-                        <td class="tg-6qw2"><b>190</b></td>
-                        <td class="tg-6qw2"><b>10.8</b></td>
+                        <td class="tg-baqh"><a href=https://objaverse.allenai.org/ target="_blank"> UniG3D-Objaverse</a></td>
+                        <td class="tg-baqh">5 million</td>
+                        <td class="tg-baqh">500K</td>
+                        <td class="tg-baqh">10 million</td>
+                        <td class="tg-baqh">500K</td>
                       </tr>
                     </tbody>
                     </table>
@@ -239,7 +151,7 @@
           </br>
             
           <p class="paragraph-3 nerf_text", style="text-align:center">
-              Table 1. A comparison between OmniObject3D and other commonly-used 3D object datasets. It is the largest among all the real-world scanned object datasets.
+              Table 1. The statistical information of the four representa- tions in two UniG3D datasets..
           </p>
           
         </br>
