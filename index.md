@@ -1,3 +1,7 @@
+---
+title: My Awesome Site
+description: This is the best site ever! [Link](http://example.com)
+---
 # 标题
 
 这是一段正文内容。
