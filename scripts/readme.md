@@ -6,16 +6,16 @@ Please configure the Blender environment on your machine first.
 
 # 0-1.Mesh
 
-Below is a script that can be run within Blender to render a 3D model as an 'obj' format mesh. Example usage: `blender -b -P glb2obj.py input_path`
+Below is a script that can be run within Blender to render a 3D model as an 'obj' format mesh. Go to `0_mesh-obj` folder. Example usage: `blender -b -P glb2obj.py input_path`
 
-Then, use the following script to convert the obj format to sdf format. Copy `isosurface` folder from https://github.com/yccyenchicheng/SDFusion/tree/master/preprocess/isosurface. Example usage: `python obj2sdf.py --model obj_path --reduce 4 --save_path sdf_path`
+Then, use the following script to convert the obj format to sdf format. Copy `isosurface` folder from https://github.com/yccyenchicheng/SDFusion/tree/master/preprocess/isosurface to `1_mesh-sdf` folder.  Example usage: `python obj2sdf.py --model obj_path --reduce 4 --save_path sdf_path`
 
 `obj_path` is the path to the input obj formated mesh.  'reduce'  refers to the downsampling ratio, where the mesh is first generated at a resolution of 256, and then downsampled by a factor of 4 to obtain a mesh with a resolution of 64. `save_path` is the path to the output sdf formated mesh.
 
 
 # 2.Image
 
-Script to run within Blender to render a 3D model as RGBAD images. Example usage:  `blender -b -P glb2rgbd.py input_path output_dir`
+Script to run within Blender to render a 3D model as RGBAD images. Go to `2_img` folder. Example usage:  `blender -b -P glb2rgbd.py input_path output_dir`
 
 Pass `--camera_pose z-circular-elevated` for the rendering used to rendering the images with z-circular camera pose. Pass `--camera_pose random` for the rendering used to rendering the images with random camera pose. 
 
@@ -27,7 +27,7 @@ If the rendered images are found to be relatively dark, please use the 'img_brig
 
 To convert the 3D models into colored point clouds, we utilize the RGBAD images with random camera poses obtained in the second step.
 
-Example usage:  `python rgbd2pcd.py output_dir`
+Go to `3_pcl` folder. Example usage:  `python rgbd2pcd.py output_dir`
 
 `output_dir` refers to the output directory of the second step.
 
