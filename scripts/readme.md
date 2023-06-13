@@ -10,7 +10,7 @@ Below is a script that can be run within Blender to render a 3D model as an 'obj
 
 Then, use the following script to convert the obj format to sdf format. Copy `isosurface` folder from https://github.com/yccyenchicheng/SDFusion/tree/master/preprocess/isosurface to `1_mesh-sdf` folder.  Example usage: `python obj2sdf.py --model obj_path --reduce 4 --save_path sdf_path`
 
-`obj_path` is the path to the input obj formated mesh.  'reduce'  refers to the downsampling ratio, where the mesh is first generated at a resolution of 256, and then downsampled by a factor of 4 to obtain a mesh with a resolution of 64. `save_path` is the path to the output sdf formated mesh.
+`obj_path` is the path to the input obj formated mesh. `reduce`  refers to the downsampling ratio, where the mesh is first generated at a resolution of 256, and then downsampled by a factor of 4 to obtain a mesh with a resolution of 64. `save_path` is the path to the output sdf formated mesh.
 
 
 # 2.Image
