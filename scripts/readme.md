@@ -8,9 +8,9 @@ Please configure the Blender environment on your machine first.
 
 Below is a script that can be run within Blender to render a 3D model as an 'obj' format mesh. Example usage: `blender -b -P glb2obj.py input_path`
 
-Then, use the following script to convert the obj format to sdf format. Example usage: `python obj2sdf.py --model obj_path --reduce 4 --save_path sdf_path`
+Then, use the following script to convert the obj format to sdf format. Copy `isosurface` folder from https://github.com/yccyenchicheng/SDFusion/tree/master/preprocess/isosurface. Example usage: `python obj2sdf.py --model obj_path --reduce 4 --save_path sdf_path`
 
-`isosurface` folder is copied from https://github.com/yccyenchicheng/SDFusion/tree/master/preprocess/isosurface. `obj_path` is the path to the input obj formated mesh.  'reduce'  refers to the downsampling ratio, where the mesh is first generated at a resolution of 256, and then downsampled by a factor of 4 to obtain a mesh with a resolution of 64. `save_path` is the path to the output sdf formated mesh.
+`obj_path` is the path to the input obj formated mesh.  'reduce'  refers to the downsampling ratio, where the mesh is first generated at a resolution of 256, and then downsampled by a factor of 4 to obtain a mesh with a resolution of 64. `save_path` is the path to the output sdf formated mesh.
 
 
 # 2.Image
